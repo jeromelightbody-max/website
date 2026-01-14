@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KingQR | Affordable Luxury QR Codes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark: #0a0a0a;
+            --gold: #d4af37;
+            --gold-hover: #f1c40f;
+            --card-bg: #111111;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background: var(--dark);
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* NAVIGATION */
+        nav {
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo { font-size: 24px; font-weight: 900; letter-spacing: 2px; }
+        .logo span { color: var(--gold); }
+        .tagline-nav { font-size: 12px; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; font-weight: 700; }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 80px 5% 40px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%);
+        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; font-weight: 900; letter-spacing: -1px; }
+        .hero p { color: var(--gold); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 30px; }
+
+        /* GENERATOR DASHBOARD */
+        .dashboard {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .controls label { color: var(--gold); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px; }
+        .controls input {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 24px;
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 12px;
+            color: white;
+            box-sizing: border-box;
+            outline: none;
+            font-size: 16px;
+        }
+        .controls input:focus { border-color: var(--gold); }
+
+        .gold-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--gold);
+            color: black;
+            border: none;
+            border-radius: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.3s;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+        .gold-btn:hover { background: var(--gold-hover); transform: translateY(-2px); }
+
+        .preview { 
+            text-align: center; 
+            background: #000; 
+            padding: 30px; 
+            border-radius: 15px; 
+            border: 1px dashed #333; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        #qrcode { background: white; padding: 15px; border-radius: 8px; }
+        #downloadBtn { 
+            display: none; 
+            margin-top: 20px; 
+            color: var(--gold); 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 12px; 
+            border: 1px solid var(--gold); 
+            padding: 8px 16px; 
+            border-radius: 6px; 
+        }
+
+        /* HONEST PRICING SECTION */
+        .pricing-section { padding: 60px 5% 100px; text-align: center; }
+        .pricing-section h2 { font-size: 2rem; margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 20px;
+            width: 300px;
+            border: 1px solid #222;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card.featured {
+            border: 2px solid var(--gold);
+            transform: scale(1.05);
+            background: linear-gradient(145deg, #111, #1a1a1a);
+        }
+
+        .price { font-size: 42px; font-weight: 900; margin: 20px 0; }
+        .price span { font-size: 16px; color: #666; font-weight: 400; }
+        
+        .card p { color: #aaa; margin: 8px 0; font-size: 14px; }
+        .card strong { color: #fff; }
+
+        .one-time-badge {
+            background: var(--gold);
+            color: black;
+            font-size: 10px;
+            font-weight: 900;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        /* FOOTER VIRALITY */
+        footer {
+            text-align: center;
+            padding: 60px;
+            border-top: 1px solid #222;
+            color: #444;
+            font-size: 13px;
+        }
+        footer a { color: var(--gold); text-decoration: none; font-weight: 700; }
+
+        @media (max-width: 768px) {
+            .dashboard { grid-template-columns: 1fr; margin: 20px; padding: 20px; }
+            .hero h1 { font-size: 2.5rem; }
+            .card.featured { transform: none; margin: 20px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">KING<span>QR</span></div>
+    <div class="tagline-nav">Affordable Luxury</div>
+</nav>
+
+<section class="hero">
+    <h1>Rule Your Digital Presence.</h1>
+    <p>The Affordable Luxury QR Standard</p>
+</section>
+
+<section class="dashboard">
+    <div class="controls">
+        <label>Enter Destination URL</label>
+        <input type="text" id="urlInput" placeholder="https://your-website.com">
+        
+        <label>Logo Upload (Monarch Feature)</label>
+        <input type="file" id="logoInput" disabled>
+        
+        <button class="gold-btn" onclick="generate()">Mint Your QR Code</button>
+        <center><a id="downloadBtn">Download Asset ↓</a></center>
+    </div>
+    
+    <div class="preview">
+        <div id="qrcode"></div>
+        <p style="font-size: 11px; color: #444; margin-top: 15px;">LIVE PREVIEW</p>
+    </div>
+</section>
+
+<section class="pricing-section">
+    <h2>The Fair Deal</h2>
+    <div class="pricing-grid">
+        <div class="card">
+            <h3>Peasant</h3>
+            <div class="price">$0</div>
+            <p>1 Static QR Code</p>
+            <p>Standard Black Design</p>
+            <p>Permanent Link</p>
+            <p style="margin-top: auto; padding-top: 20px; font-size: 11px;">Free forever. Basic use.</p>
+        </div>
+
+        <div class="card featured">
+            <div><span class="one-time-badge">ONE-TIME FEE</span></div>
+            <h3>The Monarch</h3>
+            <div class="price">$29</div>
+            <p><strong>Lifetime Ownership</strong></p>
+            <p><strong>Dynamic Link Editing</strong></p>
+            <p><strong>Custom Logo Branding</strong></p>
+            <p><strong>Basic Scan Analytics</strong></p>
+            <p style="margin-top: auto; padding-top: 20px; font-size: 11px; color: var(--gold);">No subscriptions. Ever.</p>
+        </div>
+
+        <div class="card">
+            <div><span class="one-time-badge" style="background: #333; color: #fff;">PROFESSIONAL</span></div>
+            <h3>The Empire</h3>
+            <div class="price">$70</div>
+            <p><strong>Unlimited QR Codes</strong></p>
+            <p><strong>Advanced UTM Tracking</strong></p>
+            <p><strong>White Label Domains</strong></p>
+            <p><strong>API Access</strong></p>
+            <p style="margin-top: auto; padding-top: 20px; font-size: 11px;">Fixed cost pro license.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    Proudly created with <a href="#">KingQR</a> &mdash; Providing Affordable Luxury for the Modern Era.
+</footer>
+
+<script>
+    // Initialize the QR engine
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        width: 250,
+        height: 250,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+
+    function generate() {
+        var url = document.getElementById("urlInput").value;
+        if (!url) {
+            alert("Please enter a URL to generate your royal code.");
+            return;
+        }
+
+        qrcode.makeCode(url);
+
+        // Allow 500ms for the image to generate before showing download link
+        setTimeout(() => {
+            const img = document.querySelector('#qrcode img');
+            if(img) {
+                const downloadBtn = document.getElementById("downloadBtn");
+                downloadBtn.href = img.src;
+                downloadBtn.download = "KingQR-Asset.png";
+                downloadBtn.style.display = "inline-block";
+            }
+        }, 500);
+    }
+</script>
+
+</body>
+</html>
