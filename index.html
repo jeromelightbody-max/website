@@ -27,20 +27,145 @@
 
     <section class="dashboard">
             <div class="controls">
-                    <label>Enter Destination URL</label>
-                    <input type="text" id="urlInput" placeholder="https://your-website.com">
-                    
-                    <label>Logo Upload (Monarch Feature)</label>
-                    <input type="file" id="logoInput" disabled>
-                    
-                    <button class="gold-btn" onclick="generate()">Mint Your QR Code</button>
-                    <center><a id="downloadBtn">Download Asset ↓</a></center>
-                </div>
-            
-            <div class="preview">
-                    <div id="qrcode"></div>
-                    <p style="font-size: 11px; color: #444; margin-top: 15px;">LIVE PREVIEW</p>
-                </div>
+            <div class="controls">
+                    <div class="qr-type-container"
+                    style="border: 2px solid #d4af37; border-radius: 15px; padding: 20px; margin-bottom: 30px; background: rgba(212, 175, 55, 0.05);">
+                            <label
+                        style="color: #d4af37; display: block; margin-bottom: 15px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; font-size: 11px;">Select
+                        QR Type</label>
+                            <div class="qr-options-grid"
+                        style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                                    <button type="button" class="qr-tab active"
+                            onclick="switchModule('url', this)">URL</button>
+                                    <button type="button" class="qr-tab"
+                            onclick="switchModule('vcard', this)">vCard</button>
+                                    <button type="button" class="qr-tab"
+                            onclick="switchModule('file', this)">File</button>
+                                    <button type="button" class="qr-tab" onclick="switchModule('linkpage', this)">Link
+                            Page</button>
+                                    <button type="button" class="qr-tab"
+                            onclick="switchModule('googleform', this)">Google Form</button>
+                                    <button type="button" class="qr-tab"
+                            onclick="switchModule('menu', this)">Menu</button>
+                                    <button type="button" class="qr-tab" onclick="switchModule('appstories', this)">App
+                            Stories</button>
+                                    <button type="button" class="qr-tab"
+                            onclick="switchModule('landingpage', this)">Landing Page</button>
+                                    <button type="button" class="qr-tab" onclick="switchModule('smarturl', this)">Smart
+                            URL</button>
+                                    <button type="button" class="qr-tab" onclick="switchModule('gs', this)">GS</button>
+                                    <button type="button" class="qr-tab"
+                            onclick="switchModule('digital', this)">Digital</button>
+                                </div>
+                        </div>
+
+                    <div id="input-factory">
+                            <div id="mod-url" class="qr-module">
+                                    <label>Destination URL</label>
+                                    <input type="text" placeholder="https://your-kingdom.com">
+                                </div>
+
+                            <div id="mod-vcard" class="qr-module" style="display:none;">
+                                    <label>Full Name</label><input type="text" placeholder="John Doe">
+                                    <label>Company & Position</label><input type="text" placeholder="CEO, KingQR">
+                                    <label>Phone Number</label><input type="tel" placeholder="+1 234 567 890">
+                                    <label>Email Address</label><input type="email" placeholder="john@monarch.com">
+                                    <label>Website</label><input type="text" placeholder="www.yoursite.com">
+                                </div>
+
+                            <div id="mod-file" class="qr-module" style="display:none;">
+                                    <label>Upload PDF or Image</label>
+                                    <input type="file" accept=".pdf,image/*">
+                                </div>
+
+                            <div id="mod-linkpage" class="qr-module" style="display:none;">
+                                    <label>Page Title</label><input type="text" placeholder="My Social Links">
+                                    <label>Button 1 Text</label><input type="text" placeholder="Instagram">
+                                    <label>Button 1 URL</label><input type="text" placeholder="https://instagr.am/user">
+                                </div>
+
+                            <div id="mod-smarturl" class="qr-module" style="display:none;">
+                                    <label>iOS App Store Link</label><input type="text" placeholder="Apple Link">
+                                    <label>Android Play Store Link</label><input type="text" placeholder="Google Link">
+                                </div>
+
+                            <div id="mod-googleform" class="qr-module" style="display:none;">
+                                    <label>Google Form Share Link</label><input type="text"
+                            placeholder="https://forms.gle/...">
+                                </div>
+                            
+                            <div id="mod-generic" class="qr-module" style="display:none;">
+                                    <label>Content / Link</label><input type="text"
+                            placeholder="Enter data for this module...">
+                                </div>
+                        </div>
+
+                    <label>Center Logo (Monarch Feature)</label>
+                    <input type="file" id="logoInput" disabled>
+                    
+                    <button class="gold-btn" onclick="generate()">Mint Royal QR</button>
+                    <center><a id="downloadBtn">Download Asset ↓</a></center>
+
+                <style>
+                    /* Styling for the tabs to keep the gold luxury feel */
+                    .qr-tab {
+                        background: transparent;
+                        border: 1px solid #d4af37;
+                        color: #d4af37;
+                        padding: 10px 5px;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        font-size: 11px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        transition: 0.3s;
+                    }
+
+                    .qr-tab:hover {
+                        background: rgba(212, 175, 55, 0.2);
+                    }
+
+                    .qr-tab.active {
+                        background: #d4af37;
+                        color: black;
+                    }
+                </style>
+
+                <script>
+                    function switchModule(type, btn) {
+                        // 1. Highlight the correct tab
+                        document.querySelectorAll('.qr-tab').forEach(t => t.classList.remove('active'));
+                        btn.classList.add('active');
+
+                        // 2. Hide all input modules
+                        document.querySelectorAll('.qr-module').forEach(m => m.style.display = 'none');
+
+                        // 3. Show the specific module, or a generic one if not yet detailed
+                        let target = document.getElementById('mod-' + type);
+                        if (target) {
+                            target.style.display = 'block';
+                        } else {
+                            document.getElementById('mod-generic').style.display = 'block';
+                        }
+                    }
+
+                </script>
+
+                        <label>Enter Destination URL</label>
+                        <input type="text" id="urlInput" placeholder="https://your-website.com">
+                        
+                        <label>Logo Upload (Monarch Feature)</label>
+                        <input type="file" id="logoInput" disabled>
+                        
+                        <button class="gold-btn" onclick="generate()">Mint Your QR Code</button>
+                        <center><a id="downloadBtn">Download Asset ↓</a></center>
+                    
+            </div>
+                
+                <div class="preview">
+                        <div id="qrcode"></div>
+                        <p style="font-size: 11px; color: #444; margin-top: 15px;">LIVE PREVIEW</p>
+                    </div>
     </section>
 
     <section class="pricing-section">
@@ -61,7 +186,7 @@
                             <h3>The Monarch</h3>
                             <div class="price">$29</div>
                             <p><strong>Lifetime Ownership</strong></p>
-                            <p><strong>Dynamic Link Editing</strong></p>
+                            <p><strong>Dynamic QR Link Editing</strong></p>
                             <p><strong>Custom Logo Branding</strong></p>
                             <p><strong>Basic Scan Analytics</strong></p>
                             <p style="margin-top: auto; padding-top: 20px; font-size: 11px; color: var(--gold);">No
@@ -87,33 +212,55 @@
     </footer>
 
     <script>
-        var qrcode = new QRCode(document.getElementById("qrcode"), {
-            width: 250,
+        <script>
+    // Initialize the QR Engine inside the "qrcode" division
+            var qrcode = new QRCode(document.getElementById("qrcode"), {
+                width: 250,
             height: 250,
             colorDark: "#000000",
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.H
-        });
+    });
 
-        function generate() {
-            var url = document.getElementById("urlInput").value;
+            function generate() {
+        // 1. Find the URL from the input box
+        var url = document.getElementById("urlInput").value;
+
+            // 2. Alert the user if the box is empty
             if (!url) {
                 alert("Please enter a URL to generate your royal code.");
-                return;
-            }
+            return;
+        }
 
+            // 3. Clear the previous QR and Mint the new one
             qrcode.makeCode(url);
 
-            setTimeout(() => {
-                const img = document.querySelector('#qrcode img');
-                if (img) {
-                    const downloadBtn = document.getElementById("downloadBtn");
-                    downloadBtn.href = img.src;
-                    downloadBtn.download = "KingQR-Asset.png";
-                    downloadBtn.style.display = "inline-block";
-                }
-            }, 500);
-        }
+        // 4. Prepare the Download link
+        setTimeout(() => {
+            const img = document.querySelector('#qrcode img');
+            if (img) {
+                const downloadBtn = document.getElementById("downloadBtn");
+            downloadBtn.href = img.src;
+            downloadBtn.download = "KingQR-Static.png";
+            downloadBtn.style.display = "inline-block";
+            }
+        }, 500);
+    }
+
+            // This handles switching between the URL, vCard, and File boxes
+            function switchModule(type, btn) {
+                document.querySelectorAll('.qr-tab').forEach(t => t.classList.remove('active'));
+            btn.classList.add('active');
+        document.querySelectorAll('.qr-module').forEach(m => m.style.display = 'none');
+            let target = document.getElementById('mod-' + type);
+            if (target) {
+                target.style.display = 'block';
+        } else {
+                document.getElementById('mod-generic').style.display = 'block';
+        }
+    }
+    </script>
+    }
     </script>
 
 </body>
