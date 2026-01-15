@@ -1,112 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KingQR | Affordable Luxury QR Codes</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+        
+    <meta charset="UTF-8">
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>KingQR | Affordable Luxury QR Codes</title>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<nav>
-    <div class="logo">KING<span>QR</span></div>
-    <div class="tagline-nav">Affordable Luxury</div>
-</nav>
+    <nav>
+            <div class="logo">KING<span>QR</span></div>
+            <div class="tagline-nav">Affordable Luxury</div>
+    </nav>
 
-<section class="hero">
-    <h1>Rule Your Digital Presence.</h1>
-    <p>The Affordable Luxury QR Standard</p>
-</section>
+    <section class="hero">
+            <h1>Rule Your Digital Presence.</h1>
+            <p>The Affordable Luxury QR Standard</p>
+    </section>
 
-<section class="dashboard">
-    <div class="controls">
-        <label>Enter Destination URL</label>
-        <input type="text" id="urlInput" placeholder="https://your-website.com">
-        
-        <label>Logo Upload (Monarch Feature)</label>
-        <input type="file" id="logoInput" disabled>
-        
-        <button class="gold-btn" onclick="generate()">Mint Your QR Code</button>
-        <center><a id="downloadBtn">Download Asset ↓</a></center>
-    </div>
-    
-    <div class="preview">
-        <div id="qrcode"></div>
-        <p style="font-size: 11px; color: #444; margin-top: 15px;">LIVE PREVIEW</p>
-    </div>
-</section>
+    <section class="dashboard">
+            <div class="controls">
+                    <label>Enter Destination URL</label>
+                    <input type="text" id="urlInput" placeholder="https://your-website.com">
+                    
+                    <label>Logo Upload (Monarch Feature)</label>
+                    <input type="file" id="logoInput" disabled>
+                    
+                    <button class="gold-btn" onclick="generate()">Mint Your QR Code</button>
+                    <center><a id="downloadBtn">Download Asset ↓</a></center>
+                </div>
+            
+            <div class="preview">
+                    <div id="qrcode"></div>
+                    <p style="font-size: 11px; color: #444; margin-top: 15px;">LIVE PREVIEW</p>
+                </div>
+    </section>
 
-<section class="pricing-section">
-    <h2>The Fair Deal</h2>
-    <div class="pricing-grid">
-        <div class="card">
-            <h3>Peasant</h3>
-            <div class="price">$0</div>
-            <p>1 Static QR Code</p>
-            <p>Standard Black Design</p>
-            <p>Permanent Link</p>
-            <p style="margin-top: auto; padding-top: 20px; font-size: 11px;">Free forever. Basic use.</p>
-        </div>
+    <section class="pricing-section">
+            <h2>The Fair Deal</h2>
+            <div class="pricing-grid">
+                    <div class="card">
+                            <h3>Commoner</h3>
+                            <div class="price">$0</div>
+                            <p>1 Static QR Code</p>
+                            <p>Standard Black Design</p>
+                            <p>Permanent Link</p>
+                            <p style="margin-top: auto; padding-top: 20px; font-size: 11px;">Free forever. Basic use.
+                </p>
+                        </div>
 
-        <div class="card featured">
-            <div><span class="one-time-badge">ONE-TIME FEE</span></div>
-            <h3>The Monarch</h3>
-            <div class="price">$29</div>
-            <p><strong>Lifetime Ownership</strong></p>
-            <p><strong>Dynamic Link Editing</strong></p>
-            <p><strong>Custom Logo Branding</strong></p>
-            <p><strong>Basic Scan Analytics</strong></p>
-            <p style="margin-top: auto; padding-top: 20px; font-size: 11px; color: var(--gold);">No subscriptions. Ever.</p>
-        </div>
+                    <div class="card featured">
+                            <div><span class="one-time-badge">ONE-TIME FEE</span></div>
+                            <h3>The Monarch</h3>
+                            <div class="price">$29</div>
+                            <p><strong>Lifetime Ownership</strong></p>
+                            <p><strong>Dynamic Link Editing</strong></p>
+                            <p><strong>Custom Logo Branding</strong></p>
+                            <p><strong>Basic Scan Analytics</strong></p>
+                            <p style="margin-top: auto; padding-top: 20px; font-size: 11px; color: var(--gold);">No
+                    subscriptions. Ever.</p>
+                        </div>
 
-        <div class="card">
-            <div><span class="one-time-badge" style="background: #333; color: #fff;">PROFESSIONAL</span></div>
-            <h3>The Empire</h3>
-            <div class="price">$70</div>
-            <p><strong>Unlimited QR Codes</strong></p>
-            <p><strong>Advanced UTM Tracking</strong></p>
-            <p><strong>White Label Domains</strong></p>
-            <p><strong>API Access</strong></p>
-            <p style="margin-top: auto; padding-top: 20px; font-size: 11px;">Fixed cost pro license.</p>
-        </div>
-    </div>
-</section>
+                    <div class="card">
+                            <div><span class="one-time-badge" style="background: #333; color: #fff;">PROFESSIONAL</span>
+                </div>
+                            <h3>The Empire</h3>
+                            <div class="price">$70</div>
+                            <p><strong>Unlimited QR Codes</strong></p>
+                            <p><strong>Advanced UTM Tracking</strong></p>
+                            <p><strong>White Label Domains</strong></p>
+                            <p><strong>API Access</strong></p>
+                            <p style="margin-top: auto; padding-top: 20px; font-size: 11px;">Fixed cost pro license.</p>
+                        </div>
+                </div>
+    </section>
 
-<footer>
-    Proudly created with <a href="#">KingQR</a> &mdash; Providing Affordable Luxury for the Modern Era.
-</footer>
+    <footer>
+            Proudly created with <a href="#">KingQR</a> &mdash; Providing Affordable Luxury for the Modern Era.
+    </footer>
 
-<script>
-    var qrcode = new QRCode(document.getElementById("qrcode"), {
-        width: 250,
-        height: 250,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
+    <script>
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            width: 250,
+            height: 250,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
 
-    function generate() {
-        var url = document.getElementById("urlInput").value;
-        if (!url) {
-            alert("Please enter a URL to generate your royal code.");
-            return;
-        }
+        function generate() {
+            var url = document.getElementById("urlInput").value;
+            if (!url) {
+                alert("Please enter a URL to generate your royal code.");
+                return;
+            }
 
-        qrcode.makeCode(url);
+            qrcode.makeCode(url);
 
-        setTimeout(() => {
-            const img = document.querySelector('#qrcode img');
-            if(img) {
-                const downloadBtn = document.getElementById("downloadBtn");
-                downloadBtn.href = img.src;
-                downloadBtn.download = "KingQR-Asset.png";
-                downloadBtn.style.display = "inline-block";
-            }
-        }, 500);
-    }
-</script>
+            setTimeout(() => {
+                const img = document.querySelector('#qrcode img');
+                if (img) {
+                    const downloadBtn = document.getElementById("downloadBtn");
+                    downloadBtn.href = img.src;
+                    downloadBtn.download = "KingQR-Asset.png";
+                    downloadBtn.style.display = "inline-block";
+                }
+            }, 500);
+        }
+    </script>
 
 </body>
+
 </html>
