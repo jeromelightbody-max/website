@@ -1,0 +1,184 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  background: #0a0a0a;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#screen {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+/* ── Toolbar ─────────────────────────────────────────────────────────────── */
+#toolbar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 72px;
+  background: rgba(18, 18, 18, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  transform: translateY(100%);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 100;
+}
+
+#toolbar.visible { transform: translateY(0); }
+
+.tb-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 52px;
+  height: 52px;
+  padding: 6px 10px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  color: #ccc;
+  font-size: 11px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+}
+
+.tb-btn .icon { font-size: 20px; line-height: 1; }
+.tb-btn:active { background: rgba(255,255,255,0.14); }
+.tb-btn.active {
+  background: rgba(99, 179, 237, 0.2);
+  border-color: rgba(99, 179, 237, 0.5);
+  color: #63b3ed;
+}
+
+/* Spacer pushes status to the right */
+.tb-spacer { flex: 1; }
+
+#status-area {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #666;
+  font-size: 11px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.status-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #444;
+  transition: background 0.3s;
+}
+.status-dot.connected    { background: #48bb78; box-shadow: 0 0 6px #48bb78; }
+.status-dot.disconnected { background: #fc8181; }
+.status-dot.error        { background: #f6ad55; }
+
+#fps { font-variant-numeric: tabular-nums; min-width: 36px; text-align: right; }
+
+/* ── Special-keys panel ──────────────────────────────────────────────────── */
+#keys-panel {
+  position: fixed;
+  bottom: 72px; left: 0; right: 0;
+  background: rgba(14, 14, 14, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 12px;
+  display: none;
+  flex-wrap: wrap;
+  gap: 8px;
+  z-index: 99;
+}
+#keys-panel.visible { display: flex; }
+
+.key-btn {
+  padding: 8px 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  color: #aaa;
+  font-size: 12px;
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.key-btn:active { background: rgba(255,255,255,0.14); }
+
+/* ── Toast ───────────────────────────────────────────────────────────────── */
+#toast {
+  position: fixed;
+  top: 20px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(30,30,30,0.95);
+  color: #eee;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  z-index: 200;
+  white-space: nowrap;
+}
+#toast.show { opacity: 1; }
+
+/* ── Hidden keyboard input ───────────────────────────────────────────────── */
+#kb-input {
+  position: fixed;
+  bottom: 80px; left: 50%;
+  transform: translateX(-50%);
+  width: 200px; height: 40px;
+  opacity: 0;
+  font-size: 16px; /* prevents iOS auto-zoom */
+  border: none; outline: none;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  pointer-events: none;
+}
+
+/* ── Connection overlay ──────────────────────────────────────────────────── */
+#overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: #0a0a0a;
+  z-index: 300;
+  transition: opacity 0.4s;
+}
+#overlay.hidden { opacity: 0; pointer-events: none; }
+
+#overlay .spinner {
+  width: 40px; height: 40px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: #63b3ed;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#overlay p {
+  color: #666;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}

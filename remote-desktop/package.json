@@ -1,0 +1,15 @@
+{
+  "name": "remote-desktop",
+  "version": "1.0.0",
+  "description": "Self-hosted browser remote desktop — stream your screen to any phone browser",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "FRAME_RATE=15 QUALITY=75 node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "screenshot-desktop": "^1.12.7",
+    "ws": "^8.16.0"
+  }
+}

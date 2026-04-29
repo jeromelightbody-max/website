@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Remote Desktop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Screen canvas -->
+  <canvas id="screen"></canvas>
+
+  <!-- Connecting overlay -->
+  <div id="overlay">
+    <div class="spinner"></div>
+    <p>Connecting to your computer…</p>
+  </div>
+
+  <!-- Toast messages -->
+  <div id="toast"></div>
+
+  <!-- Hidden keyboard input -->
+  <input id="kb-input" type="text"
+    autocomplete="off" autocorrect="off"
+    autocapitalize="off" spellcheck="false">
+
+  <!-- Special-keys panel (shown when keyboard button tapped) -->
+  <div id="keys-panel">
+    <button class="key-btn" data-key="Escape">Esc</button>
+    <button class="key-btn" data-key="Tab">Tab</button>
+    <button class="key-btn" data-key="Return">Enter</button>
+    <button class="key-btn" data-key="BackSpace">⌫</button>
+    <button class="key-btn" data-key="Delete">Del</button>
+    <button class="key-btn" data-key="Home">Home</button>
+    <button class="key-btn" data-key="End">End</button>
+    <button class="key-btn" data-key="Up">↑</button>
+    <button class="key-btn" data-key="Down">↓</button>
+    <button class="key-btn" data-key="Left">←</button>
+    <button class="key-btn" data-key="Right">→</button>
+    <button class="key-btn" data-key="super">⌘ Super</button>
+    <button class="key-btn" data-key="alt+F4">Alt+F4</button>
+    <button class="key-btn" data-key="ctrl+c">Ctrl+C</button>
+    <button class="key-btn" data-key="ctrl+v">Ctrl+V</button>
+    <button class="key-btn" data-key="ctrl+z">Ctrl+Z</button>
+    <button class="key-btn" data-key="ctrl+alt+t">Terminal</button>
+  </div>
+
+  <!-- Bottom toolbar -->
+  <div id="toolbar">
+    <button class="tb-btn" id="btn-keyboard">
+      <span class="icon">⌨️</span>
+      <span>Type</span>
+    </button>
+    <button class="tb-btn" id="btn-keys">
+      <span class="icon">🔑</span>
+      <span>Keys</span>
+    </button>
+    <button class="tb-btn" id="btn-rclick">
+      <span class="icon">🖱️</span>
+      <span>R-Click</span>
+    </button>
+    <button class="tb-btn" id="btn-zoom-reset">
+      <span class="icon">⤢</span>
+      <span>Fit</span>
+    </button>
+
+    <div class="tb-spacer"></div>
+
+    <div id="status-area">
+      <div class="status-dot" id="status-dot"></div>
+      <span id="fps">--</span>
+    </div>
+  </div>
+
+  <script src="client.js"></script>
+</body>
+</html>
